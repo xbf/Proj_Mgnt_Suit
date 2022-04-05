@@ -1,0 +1,41 @@
+plugins {
+    id 'org.springframework.boot' version '2.5.2'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
+}
+
+group = 'com.sse.g4'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web:2.5.4'
+//  因为mpx包中应用的poi版本为4.12，与easyexcel中引用的3.17版本的poi包冲突，所以将其去掉
+    implementation ('net.sf.mpxj:mpxj:9.5.2') {
+        exclude group: 'org.apache.poi', module: 'poi'
+    }
+    implementation 'org.apache.commons:commons-lang3:3.12.0'
+    implementation 'net.sf.jacob-project:jacob:1.14.3'
+    implementation 'com.alibaba:easyexcel:2.2.10'
+    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.0'
+    implementation 'org.apache.httpcomponents:httpclient:4.5.13'
+    implementation 'com.alibaba:fastjson:1.2.78'
+    implementation 'mysql:mysql-connector-java:8.0.26'
+    compileOnly 'org.projectlombok:lombok:1.18.20'
+    annotationProcessor 'org.projectlombok:lombok:1.18.20'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test:2.5.4'
+}
+
+test {
+    useJUnitPlatform()
+}

@@ -1,0 +1,24 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sse.g4.proj.dao.F101_150_AuthDao">
+
+    <sql id="staff">
+        staff_id, branch_no, staff_acc, staff_name, gender, mobile, email, password, staff_status, register_date, cancel_date
+    </sql>
+
+    <select id="f2100101" resultType="com.sse.g4.proj.common.packer.ParamMap" >
+        select
+            <include refid="staff"/>
+        from staff
+        where staff_acc = #{staffAcc}
+    </select>
+
+
+    <select id="f2100102" resultType="com.sse.g4.proj.common.packer.ParamMap" >
+        select distinct c.menu_site, a.staff_id, a.staff_name, a.branch_no, c.menu_id, c.menu_name, c.menu_path, c.icon, c.component
+        from staff a, roles b, menus c, stafftorole d, menutorole e
+        where a.staff_id = d.staff_id and c.menu_id = e.menu_id and d.role_id = e.role_id
+          and a.staff_acc = #{staffAcc} order by menu_site
+    </select>
+
+</mapper>
