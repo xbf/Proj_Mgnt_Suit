@@ -7,7 +7,6 @@ package com.sse.g4.proj.common.constant;
 public enum ProjMgntErrorInfo {
     E1001(1001, "生成站会日志文件失败", "proj_mgnt");
 
-    //测试一下Git的使用
     private int errorNo;
     private String errorInfo;
     private String serviceName;
