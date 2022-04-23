@@ -3,7 +3,6 @@ package com.sse.g4.proj;
 import com.alibaba.excel.EasyExcel;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,12 +15,14 @@ import java.util.Map;
  */
 
 @Data
-@Component
+//@Component
 public class OrganInfo {
     private String director;
     private String projectManager;
     private String architect;
     private HashMap<String, Team> teamInfos;
+
+
 
     //在构造函数中读取属性文件的值时，使用这种方法赋值
     public OrganInfo(@Value("${com.sse.xubf.stakeholder.path}") String filePath) {

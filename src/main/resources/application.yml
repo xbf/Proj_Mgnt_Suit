@@ -2,11 +2,8 @@ com:
   sse:
     xubf:
       proj:
-        path: C:\\workspace\\PD_CT_50002_1.0_G4架构及新期权后台跟账2022年开发计划.mpp
-      stakeholder:
-        path: C:\\workspace\\PD_CT_55001_干系人登记册.xlsx
-      dailyMeeting:
         path: C:\\workspace
+
 
 
 spring:

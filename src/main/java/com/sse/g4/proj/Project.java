@@ -1,11 +1,11 @@
 package com.sse.g4.proj;
 
 import lombok.Getter;
+import net.sf.mpxj.MPXJException;
 import net.sf.mpxj.ProjectFile;
 import net.sf.mpxj.Task;
 import net.sf.mpxj.mpp.MPPReader;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 
@@ -15,23 +15,34 @@ import java.util.List;
  * @author 许白峰
  * @date 20210801
  */
-@Component
+//@Component
 @Getter
 public class Project {
 
-    @Value("${com.sse.xubf.proj.path}")
-    private String filePath;
+//    @Value("${com.sse.xubf.proj.path}")
+//    private String filePath;
+
+    private ProjectFile projectFile;
+
     private String currDate;
     private TaskInfo taskInfo;
 
+    public Project(@Value("D008_V1.5_2022年下一代交易研发部项目工程工作计划.mpp") String filePath) {
+        MPPReader mppReader = new MPPReader();
+        try {
+            projectFile = mppReader.read(filePath);
+        } catch (MPXJException e) {
+            throw new RuntimeException(e);
+        }
+    }
     /**
      * 根据当前日期载入Project文件中的WBS，构建taskInfo对象实例
      */
     public TaskInfo getTaskInfo(String currDate) throws Exception {
         this.currDate = currDate;
-        MPPReader mppReader = new MPPReader();
-        ProjectFile file = mppReader.read(filePath);
-        List<Task> taskList = file.getChildTasks();
+//        MPPReader mppReader = new MPPReader();
+//        ProjectFile file = mppReader.read(filePath);
+        List<Task> taskList = projectFile.getChildTasks();
 
         Task task;
         if (!taskList.isEmpty()) {

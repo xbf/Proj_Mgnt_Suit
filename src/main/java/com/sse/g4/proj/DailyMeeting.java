@@ -3,17 +3,11 @@ package com.sse.g4.proj;
 
 import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.ExcelWriter;
-import com.alibaba.excel.write.handler.WriteHandler;
 import com.alibaba.excel.write.metadata.WriteSheet;
 import com.alibaba.excel.write.metadata.fill.FillConfig;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -24,31 +18,26 @@ import java.util.HashMap;
  * @author 许白峰
  */
 
-@Component
-@Scope(value = "prototype")
+//@Component
+//@Scope(value = "prototype")
 public class DailyMeeting {
 
     private String currDate;
-    @Autowired
+//    @Autowired
     private OrganInfo organInfo;
-    @Autowired
+//    @Autowired
     private Project project;
 
-    @Value("${com.sse.xubf.dailyMeeting.path}")
     private String filePath;
 
     private HashMap<String, TeamWork> teamWorkMap = new HashMap<>();
 
-    public DailyMeeting(String currDate) throws Exception {
+    public DailyMeeting(Project project, OrganInfo organInfo, String currDate, String filePath) throws Exception {
+        this.project = project;
+        this.organInfo = organInfo;
         this.currDate = currDate;
-    }
+        this.filePath = filePath;
 
-    /**
-     * OrganInfo和Project这两个由容器管理的对象是不能在构造函数中访问的，因此在PostConstruct方法中执行初始化
-     * @throws Exception
-     */
-    @PostConstruct
-    public void init() throws Exception {
         for (String teamName : organInfo.getTeamInfos().keySet()) {
             Team team = organInfo.getTeamInfos().get(teamName);
             TeamWork teamWork = new TeamWork(project);

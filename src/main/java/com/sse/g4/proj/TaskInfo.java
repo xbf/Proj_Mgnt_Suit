@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import net.sf.mpxj.Task;
 import org.apache.commons.lang3.StringUtils;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -137,7 +138,6 @@ public class TaskInfo implements Cloneable {
     public void writeToProject(Task task, TaskInfo taskInfo) {
         this.complete = taskInfo.getComplete() * 100;
         task.setPercentageComplete(this.complete);
-
     }
 
     /**
